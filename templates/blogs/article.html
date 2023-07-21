@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{article.title}}</h1>
+<p>Ditulis oleh {{article.author.username}}</p>
+<span>{{article.date_added}}</span>
+<p>{{article.body | safe | linebreaks}}</p>
+<a href="{% url 'homepage' %}">Kembali ke homepage</a>
+{% endblock %}

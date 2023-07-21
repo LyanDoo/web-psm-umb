@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block hero %}
+<div class="hero">
+    <div id="web-title-h1">
+        <h1 style="margin-bottom: 0;">Paduan Suara Mahasiswa</h1>
+        <h1 style="color: #ffd95a;margin-top: 0;">Universitas Mercu Buana</h1>
+    </div>
+    <p style="max-width: 50%;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <button class="btn-hero">Hubungi Kami</button>
+</div>
+{% endblock %}
+{% block login %}
+{% endblock %}
+
+{% block homepage %} 
+<section class="about-us">
+    <div id="about-us-h1">
+        <h1 style="font-size: 50px;">Tentang Kami</h1>
+    </div>
+    <div id="about-us-desc">
+        {% lorem 2 p %}
+    </div>
+</section>
+<section class="home-achievements">
+    <div class="item-home-achievements">
+        <h1>PENGHARGAAN</h1>
+        <ul>
+            <li>Penghargaan 1</li>
+            <li>Penghargaan 2</li>
+            <li>Penghargaan 3</li>
+            <li>Penghargaan 4</li>
+        </ul>
+    </div>
+    <div class="item-home-achievements">
+        <h1>PENGHARGAAN</h1>
+        <ul>
+            <li>Penghargaan 1</li>
+            <li>Penghargaan 2</li>
+            <li>Penghargaan 3</li>
+            <li>Penghargaan 4</li>
+        </ul>
+    </div>
+    
+</section>
+<section class="home-news">
+    {% for article in articles %}
+        <div class="home-news-content">
+            <h1 onclick="lookArticle('{% url 'article-detail' article_id=article.article_id %}');">{{article.title}}</h1>
+            <p>Ditulis oleh {{article.author.username}}</p>
+            <span>{{article.date_added}}</span>
+            <p>{{article.body | slice:":100" | safe | linebreaks}}....</p>
+            <a href="{% url 'article-detail' article_id=article.article_id %}">Baca Selengkapnya</a>
+        </div>
+    {% endfor %}
+</section>
+
+<script>
+    function lookArticle(url) {
+        window.location.replace(url)
+    }
+</script>
+{% endblock %}

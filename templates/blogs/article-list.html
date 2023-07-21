@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %} 
+<section class="content-container">
+    {% load auth_extras %}
+    {% if user.is_authenticated %}
+        {% if user|has_group:"Content-Editor" %}
+            <span>kamu adalah content editor</span><br>
+            <a href="{% url 'add-article-form' %}">Make Article</a>
+        {% endif %}
+    {% endif%}
+    {% for article in articles %}
+        <h1 onclick="lookArticle('{% url 'article-detail' article_id=article.article_id %}');">{{article.title}}</h1>
+        <p>Ditulis oleh {{article.author.username}}</p>
+        <span>{{article.date_added}}</span>
+        <p>{{article.body | slice:":100" | safe | linebreaks}}....</p>
+        <a href="{% url 'article-detail' article_id=article.article_id %}">Baca Selengkapnya</a>
+    
+        {% if user.is_authenticated %}
+            {% if user|has_group:"Content-Editor" %}
+                <a href="{% url 'edit-article-form' article_id=article.article_id %}">Edit Artikel</a>
+            {% endif %}
+        {% endif %}
+    
+    {% endfor %}
+    <script>
+        function lookArticle(url) {
+            window.location.replace(url)
+        }
+    </script>
+</section>
+{% endblock %}

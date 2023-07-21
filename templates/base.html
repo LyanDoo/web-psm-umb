@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static './style.css' %}">
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <div class="navigation-bar">
+                <div class="logo">
+                    <img src="{% static './Resources/images/psm.jpeg' %}" alt="">
+                </div>
+                {% if user.is_authenticated %}
+                <span>Welcome, {{ user.username }}</span>
+                {% endif %}
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'homepage' %}">Homepage</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Achievements</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="{% url 'articles-page' %}">News</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout form' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login form' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            {% block hero %} {% endblock %}
+        </header>
+        <div class="main-content">
+            {% block login %} {% endblock %}
+            {% block homepage %}{% endblock %}
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer>
+            <p>&#169; PSM UMB 2023</p>
+        </footer>
+    </body>
+</html>

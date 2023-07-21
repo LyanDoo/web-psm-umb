@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Login Form</title>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<p>Kamu telah terautentikasi sebagai {{ user.username }}</p>
+<a href="{% url 'homepage' %}">Kembali ke Homepage</a>
+{% else %}
+<span>{{message}}</span>
+<form action="." method="post">
+    <div class="login-form">
+        <h1>Sign in</h1>
+        {% csrf_token %}
+        {{form.as_ul}}
+        <input id="login-submit" type="submit" value="Login">
+    </div>
+</form>
+{% endif %}
+{% endblock %}

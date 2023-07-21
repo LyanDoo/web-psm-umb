@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'castoro';
+    src: url('./Resources/Fonts/Castoro Titling/CastoroTitling-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'playfair';
+    src: url('./Resources/Fonts/Playfair/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+}

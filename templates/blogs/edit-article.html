@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.media}}
+    {{form.author.as_hidden}}
+    {{form.as_ul}}
+    <br>
+    <input type="submit">
+</form>
+<a href="{% url 'homepage' %}">Kembali ke Homepage</a>
+{% endblock %}
